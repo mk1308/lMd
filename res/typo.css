@@ -1,0 +1,1538 @@
+/* SOMMAIRE
+
+—  reset css
+—  liens
+—  caractères
+—— typographie generale (titraille, balises classiques)
+—— tableaux
+—— éléments d'articles
+—  signatures
+—  aperçus
+—  documents
+—  tableaux
+—— formulaires
+
+
+/* Reset css from http://meyerweb.com/eric/tools/css/reset/ modifie pour le diplo */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, figure, figcaption {
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+font-size: 100%;
+vertical-align: baseline;
+background: transparent;
+}
+
+
+ol, ul {
+list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+content: '';
+content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+outline: 0;
+}
+
+del {
+text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+.on, .on a, a.on {
+font-weight: inherit;
+}
+
+html { 
+font-size: 100%; 
+} 
+
+
+/* Liens
+---------------------------------------------- */
+
+a, a.spip_out {
+color: #be2e0d;
+text-decoration: none;
+transition-duration:.2s;
+transition-property: color;
+-moz-transition-duration:.2s;
+-moz-transition-property: color;
+-webkit-transition-duration:.2s;
+-webkit-transition-property: color;
+}
+
+a:visited {
+color: #be2e0d;
+text-decoration: none;
+}
+
+a.spip_glossaire {
+text-decoration: none;
+color: #666666;
+}
+
+a:hover, a:focus {
+color: #713122;
+text-decoration: none;
+}
+
+a.spip_glossaire:hover {
+color: #713122;
+text-decoration: none;
+}
+
+/* annuler les icones de la dist de spip pour les liens sortants */
+a.spip_out {
+background:none;
+padding-right:0px;
+}
+
+a.spip_out:hover {
+color: #ffbc36;
+}
+
+/* Couleurs du surlignement */
+
+/* Mozilla */
+::-moz-selection {
+background-color: #be2e0d;
+color: #ffffff;
+}
+
+/* Safari et al */
+::selection {
+background-color: #be2e0d;
+color: #ffffff;
+}
+
+
+/* Caractères
+---------------------------------------------- */
+
+/* serif normal; ital, gras et gras ital */
+
+@font-face {
+    font-family: 'Walbaum';
+    src:url('peaulisses/walbaum10xlpro.eot');
+    src:url('peaulisses/walbaum10xlpro.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaum10xlpro.woff2') format('woff2'),
+        url('peaulisses/walbaum10xlpro.woff') format('woff'),
+        url('peaulisses/walbaum10xlpro.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Walbaum';
+    src:url('peaulisses/walbaum10xlproitalic.eot');
+    src:url('peaulisses/walbaum10xlproitalic.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaum10xlproitalic.woff2') format('woff2'),
+        url('peaulisses/walbaum10xlproitalic.woff') format('woff'),
+        url('peaulisses/walbaum10xlproitalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Walbaum';
+    src:url('peaulisses/walbaum10xlprobold.eot');
+    src:url('peaulisses/walbaum10xlprobold.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaum10xlprobold.woff2') format('woff2'),
+        url('peaulisses/walbaum10xlprobold.woff') format('woff'),
+        url('peaulisses/walbaum10xlprobold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Walbaum';
+    src:url('peaulisses/walbaum10xlprobolditalic.eot');
+    src:url('peaulisses/walbaum10xlprobolditalic.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaum10xlprobolditalic.woff2') format('woff2'),
+        url('peaulisses/walbaum10xlprobolditalic.woff') format('woff'),
+        url('peaulisses/walbaum10xlprobolditalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* sans-serif normal, ital, gras et gras ital
+La graisse standard est utilisée dans l'interface mais pas pour le texte */
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgroteskbook.eot');
+    src:url('peaulisses/walbaumgroteskbook.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgroteskbook.woff2') format('woff2'),
+        url('peaulisses/walbaumgroteskbook.woff') format('woff'),
+        url('peaulisses/walbaumgroteskbook.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgroteskbookitalic.eot');
+    src:url('peaulisses/walbaumgroteskbookitalic.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgroteskbookitalic.woff2') format('woff2'),
+        url('peaulisses/walbaumgroteskbookitalic.woff') format('woff'),
+        url('peaulisses/walbaumgroteskbookitalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgroteskbookbold.eot');
+    src:url('peaulisses/walbaumgroteskbookbold.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgroteskbookbold.woff2') format('woff2'),
+        url('peaulisses/walbaumgroteskbookbold.woff') format('woff'),
+        url('peaulisses/walbaumgroteskbookbold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgroteskbookbolditalic.eot');
+    src:url('peaulisses/walbaumgroteskbookbolditalic.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgroteskbookbolditalic.woff2') format('woff2'),
+        url('peaulisses/walbaumgroteskbookbolditalic.woff') format('woff'),
+        url('peaulisses/walbaumgroteskbookbolditalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* sans-serif texte, texte ital, très gras et très gras ital
+La graisse standard est utilisée pour le texte. Le très gras pour certaines titrailles */
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgrotesktext.eot');
+    src:url('peaulisses/walbaumgrotesktext.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgrotesktext.woff2') format('woff2'),
+        url('peaulisses/walbaumgrotesktext.woff') format('woff'),
+        url('peaulisses/walbaumgrotesktext.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgrotesktextitalic.eot');
+    src:url('peaulisses/walbaumgrotesktextitalic.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgrotesktextitalic.woff2') format('woff2'),
+        url('peaulisses/walbaumgrotesktextitalic.woff') format('woff'),
+        url('peaulisses/walbaumgrotesktextitalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgrotesktextbold.eot');
+    src:url('peaulisses/walbaumgrotesktextbold.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgrotesktextbold.woff2') format('woff2'),
+        url('peaulisses/walbaumgrotesktextbold.woff') format('woff'),
+        url('peaulisses/walbaumgrotesktextbold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgrotesktextbolditalic.eot');
+    src:url('peaulisses/walbaumgrotesktextbolditalic.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgrotesktextbolditalic.woff2') format('woff2'),
+        url('peaulisses/walbaumgrotesktextbolditalic.woff') format('woff'),
+        url('peaulisses/walbaumgrotesktextbolditalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+/* sans serif ligh et ital associé. Rares titrailles. */
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgrotesklight.eot');
+    src:url('peaulisses/walbaumgrotesklight.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgrotesklight.woff2') format('woff2'),
+        url('peaulisses/walbaumgrotesklight.woff') format('woff'),
+        url('peaulisses/walbaumgrotesklight.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgrotesklightitalic.eot');
+    src:url('peaulisses/walbaumgrotesklightitalic.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgrotesklightitalic.woff2') format('woff2'),
+        url('peaulisses/walbaumgrotesklightitalic.woff') format('woff'),
+        url('peaulisses/walbaumgrotesklightitalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+/* sans serif black et ital associé. Pas utilisé à ce stade. */
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgroteskblack.eot');
+    src:url('peaulisses/walbaumgroteskblack.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgroteskblack.woff2') format('woff2'),
+        url('peaulisses/walbaumgroteskblack.woff') format('woff'),
+        url('peaulisses/walbaumgroteskblack.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Walbaumgrot';
+    src:url('peaulisses/walbaumgroteskblackitalic.eot');
+    src:url('peaulisses/walbaumgroteskblackitalic.eot?#iefix') format('embedded-opentype'),
+        url('peaulisses/walbaumgroteskblackitalic.woff2') format('woff2'),
+        url('peaulisses/walbaumgroteskblackitalic.woff') format('woff'),
+        url('peaulisses/walbaumgroteskblackitalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+
+
+/*  ------------------------------------------
+/* 	Typographie generale (style transversaux)
+/*  ------------------------------------------ */
+
+body { 
+font-size: 1em;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+color: #333333;
+line-height: normal;
+font-weight: 400;
+}
+
+/* Titraille / Intertitres */
+
+h1,h2,h3,h4,h5,h6 { 
+margin: 0;
+padding: 0;
+font-weight: bold;
+}
+
+h1 { 	
+font-family: Walbaum, Georgia, 'Times new roman', serif;
+font-size: 3.5em;
+line-height:1.1em;
+color: #222222;
+font-weight: normal;
+margin: 0 0 15px 0;
+}
+
+.type_encadre h1, .type_glossaire h1, .type_perspective h1,
+.type_note-de-lecture h1 { 	
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+color: #333333;
+font-weight: 700;
+font-size: 2.8em;
+}
+
+.siteblogs h1, .categorie-valise h1, .type_publication h1,
+.rubrique_publication h1 { 	
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-size: 3.2em;
+font-weight: 800;
+}
+
+h2 {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-size:1.5em;
+border: 0;
+margin: 0 0 20px 0;
+padding: 0;
+text-transform: uppercase;
+font-weight: 400;
+}
+
+h2.dessous { 
+margin: 15px 0 15px 0;
+}	
+h2.catego {
+border-bottom: 1px dashed #bbbbbb;
+padding: 0 0 15px 0;
+margin: 20px 0 25px 0;
+}
+h2.catego span {
+color: #bbbbbb;
+}
+h2.avantbloc {
+padding: 45px 0 5px;
+font-size:1em;
+clear:both;
+}
+	
+h2 a span {
+color: #999999;
+display: none;
+}
+
+h2 a:hover span {
+display: inline;
+}
+
+h2 a:hover span:hover {
+color: #ee0000;
+}
+
+h3 {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-size:1.5em;
+line-height: 1.1em;
+margin: 0 0 4px 0;
+}
+h3 span {
+font-weight: 400;
+}
+
+h4, .liste li h4 {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 400;
+font-size:1.5em;
+line-height: 1.3em;
+margin: 0 0 4px 0;
+}
+
+/* style ebook a reutiliser */
+
+h1.pagex {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 700;
+font-size:2.7em;
+margin: 0 0 20px 0;
+}
+
+h2.global {
+font-size:1.6em;
+padding: 0;
+margin: 0 0 15px 0;
+}
+
+h2.global.carto {
+border-top: 5px solid #333333;
+font-size:1.5em;
+margin: 100px 0 0 0;
+padding: 20px 0 0 0;
+}
+
+h2#art {
+display:none;
+}
+
+.pagedeux h2.catego {
+margin: 100px 0 0 0;
+}
+
+h4.fat a {
+font-weight:bold;
+}
+
+
+/* Divers */
+
+strong, b {
+font-weight: 700;
+}
+em {
+font-style:italic;
+}
+
+sup, sub {
+font-size: 0.8em;
+font-variant: normal;
+line-height: 0;
+}
+
+sup {
+vertical-align: super;
+}
+
+sub {
+vertical-align: sub;
+}
+
+dfn {
+font-style: italic;
+font-weight: bold;
+}
+
+abbr, acronym {
+cursor: help; 
+}
+
+abbr {
+border-bottom: 1px dotted;
+text-decoration: none; 
+}
+
+acronym {
+border-bottom: 1px dashed; 
+}
+
+	
+/* generique sur ff mais pas present sur safari : la, c est partout */
+		
+small {
+font-size: 0.90em;
+color: #666; }
+
+
+/* Citations, code et poesie */
+
+blockquote {
+margin:2em 18% 2em 9%;
+padding:0 0 0 5%;
+font-style: normal;
+border-left: 1px solid #ccc;
+}
+blockquote p, .texte blockquote p {
+margin-left: 0;
+margin-right: 0;
+}
+cite {
+display: block;
+font-style: normal;
+font-weight: 400;
+color: #777;
+margin-left: 18%;
+text-align: right;
+}
+
+blockquote.spip {
+border-left:0px;
+padding:30px;
+background: #fad4cb;
+text-align: left;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 500;
+margin: 2em 0 2em 0;
+}
+.texte blockquote.spip {
+margin: 2em 0 2em 80px;
+}
+.texte blockquote.spip h3 {
+margin-left:0;
+}
+blockquote.spip h3:first-of-type {
+margin-top:0;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 700;
+}
+
+blockquote.spip p, blockquote.spip .chapo p {
+margin: 0.6em 0 0 0;
+}
+
+blockquote.spip p:first-of-type, blockquote.spip .chapo p:first-of-type {
+margin: 0;
+}
+
+blockquote.spip_poesie {
+border:0;
+font-size:1em;
+margin:1.5em 0 1.5em 100px;
+padding-left:1em;
+padding:0;
+color: #777777;
+text-align: left;
+}
+
+.spip_code, .spip_cadre {
+font-family: Courier,"Courier New",monospace;
+} 
+
+.spip_code {
+color: #928d84;
+} 
+
+textarea.spip_cadre {
+background:#ecece4;
+border: 0 none;
+border-radius: 20px;
+margin: 0 0 0.8em 0;
+padding: 15px;
+color: #333333;
+}
+
+kbd {
+font-size: 1.1em;
+background: #f4eddf;
+margin: 0 2px 0 2px;
+padding: 3px 8px 3px 8px;
+border-radius: 10px;
+}
+
+samp {
+color: #928d84;
+font-size: 1.3em;
+}
+
+var {
+color: #928d84;
+}
+
+p {
+margin: 1em 0 1em 0;
+}
+
+p.baseline {
+
+}
+
+hr, hr.spip {
+border:0;
+border-top:1px solid #cccccc;
+margin: 1.4em 160px 1.2em 80px;
+clear:both;
+}
+
+strong hr, strong hr.spip {
+border-top:1px solid #333333;
+}
+
+.fine {
+letter-spacing: -0.13em; /* -0.2em annule totalement l'espace */
+}
+
+optgroup, optgroup:before {
+font-style:normal;
+}
+
+optgroup:before {
+margin:10px 0 5px 0;
+font-weight: bold;
+}
+
+/* style de puce pour remplacer le triangle moche de SPIP
+$GLOBALS['puce'] = "<span class='puce'>•</span>";
+dans mes_fonctons */
+
+span.puce {
+color: #cccccc;
+vertical-align: middle;
+line-height: 1em;
+}
+
+/*  ------------------------------------------
+/* Elements d'articles
+---------------------------------------------- */
+
+.cartouche {
+margin-bottom: 50px;
+padding-bottom:7px;
+border-bottom: 1px solid #bbbbbb;
+overflow:hidden;
+}
+.blog .cartouche {
+margin-bottom: 50px;
+padding-bottom:0;
+border-bottom: 0;
+overflow:hidden;
+}
+
+.cartouche .spip_logos {
+float: right;
+margin-left: 16px;
+margin-bottom: 4px;
+}
+
+.cartouche p {
+margin: 0;
+padding: 0;
+}
+
+.surtitre, .cartouche .surtitre {
+margin-bottom: 0.50em;
+font-size: 1.4em;
+-moz-font-feature-settings: 'smcp';
+-webkit-font-feature-settings: 'smcp';
+-ms-font-feature-settings: 'smcp';
+font-feature-settings: 'smcp';
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+}
+
+.cartouche .soustitre{
+margin:10px 0 10px 0;
+margin-top: 0.50em;
+margin-bottom: 0.30em;
+}
+
+.soustitre .notes_dendl {
+display: inline;
+font-size: 1em;
+margin: 0;
+}
+
+.cartouche.vcard {
+padding: 0;
+}
+
+.cartouche .dates_auteurs, .vcard .dates_auteurs {
+margin: 30px 0 0 0;
+padding: 7px 0 0 0;
+font-size: 1.25em;
+color: #999999;
+display:block;
+text-align: center;
+border-top: 1px solid #bbbbbb;
+}
+.cartouche .dates_auteurs.paschapo {
+border-top: 0;
+margin: 25px 0 0 0;
+}
+.vcard .dates_auteurs {
+padding: 0;
+border-top: 0;
+}
+.blog .cartouche .dates_auteurs {
+margin: 10px 0 0 0;
+padding: 0x 15px 0 0;
+text-align: left;
+border-top: 0;
+}
+
+
+
+.soustitre {
+font-size: 1.3em;
+color: #666666;
+}
+
+.soustitre .notes_dendl {
+display: inline;
+font-size: 0.9em;
+margin: 0;
+}
+
+.notes_dendl {
+font-size: 0.8em;
+margin: 20px 0 0 0;
+}
+
+.chapo {	
+font-size:1.6em;
+line-height: 1.4em;
+margin: 0;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 400;
+padding: 0 15px 0 0;
+overflow:hidden;
+}
+.blog .chapo {	
+font-size:1.4em;
+font-weight: 700;
+margin-bottom: 15px;
+}
+
+.chapo p {	
+margin: 0.8em 0 0 0;
+padding: 0em;
+}
+.chapo p:first-child, .chapo p:first-of-type {	
+margin: 0;
+}
+
+.texte {	
+font-family: Walbaum, Georgia, 'Times new roman', serif;
+font-size:1.3em;
+line-height: 1.4em;
+margin : 0 0 20px 0;
+position: relative;
+}
+
+.texte p {	
+margin: 0.8em 160px 0.8em 80px;
+}
+
+.texte strong, blockquote strong {	
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+}
+
+
+.type_encadre .texte, .type_note-de-lecture .texte {	
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 500;
+}
+.type_encadre .texte strong, .type_note-de-lecture .texte strong {	
+font-weight: 800;
+}
+
+.texte h3.spip {	
+font-size:1.6em;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 400;
+text-align: left;
+text-indent:0;
+margin: 2em 120px 1em 80px;
+clear:both;
+}
+.blog .texte h3.spip {	
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 800;
+}
+.texte h3.spip strong {	
+font-weight: 800;
+}
+
+.glossaire .texte h3 {	
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+text-align: left;
+margin: 2em 0 0.5em 0;
+}
+.extrait .texte h3 {	
+text-align: left;
+margin: 2em 0 0.8em 0;
+font-weight: normal;
+font-size: 1.7em;
+}
+
+.texte ul, .texte ol {	
+padding: 0.5em 10px 0.5em 35px;
+}
+
+.texte ul li {	
+list-style-position:outside;
+list-style-type:square;
+padding: 0;
+margin: 0 0 0.3em 0;
+}
+
+.texte ul li ul {	
+padding: 0 0 0 50px;
+margin: 0;
+}
+
+.texte ol li {	
+list-style-position:outside;
+list-style-type:decimal;
+padding: 0;
+margin: 0 0 0.3em 0;
+}
+
+.texte ol li ol {	
+padding: 0 0 0 30px;
+margin: 0;
+}
+
+.texte .spip_documents {	
+margin-top:19px;
+}
+
+.texte aside {
+margin: 25px 0 25px 0;
+}
+
+.ps, .notes {
+margin: 50px 160px 50px 30px;
+}
+
+
+.notes 	{ 
+clear: both; 
+font-family: Walbaum, Georgia, 'Times new roman', serif;
+font-size: 1.08em;
+padding: 5px 0 0 0;
+border-top: 1px solid #cccccc;
+}
+.type_encadre .notes {	
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 500;
+}
+
+.notes p { 
+padding-left: 1.8em;
+text-indent : -1.8em;	
+}
+
+.notes li, .notes li.dernier		{ 
+margin: 10px 0 15px 0;
+padding: 0 0 20px 30px;
+border-bottom: solid 1px;
+}
+
+.notebox {
+position:fixed;
+background: #ffffff;
+border-top: 1px solid #ccc;
+padding: 0;
+margin:0;
+font-family: Walbaum, Georgia, 'Times new roman', serif;
+font-size: 1.08em;
+z-index: 30;
+width: 890px;
+bottom: -1px;
+}
+.notebox.plein {
+padding: 0.4em 0 1em 0;
+}
+.notebox div {
+display:none;
+}
+.notebox div.visible {
+display:block;
+}
+.type_encadre .notebox {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 500;
+}
+.notebox p {
+padding-left: 1.8em;
+text-indent : -1.8em;	
+margin: 0.8em 0 0.8em 0;
+}
+.notebox a.spip_note {
+color: #333;
+cursor: default;
+}
+
+
+
+.mot-lettrine {
+-moz-font-feature-settings: 'c2sc', 'smcp';
+-webkit-font-feature-settings: 'c2sc', 'smcp';
+-ms-font-feature-settings: 'c2sc', 'smcp';
+font-feature-settings: 'c2sc', 'smcp';
+font-style:normal;
+margin-left: -0.5em;
+}
+.lettrine {
+font-size: 6.8em;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 800;
+line-height:1em;
+display:inline-block;
+color:#bbbbbb;
+float:left;
+margin: -8px 22px 5px -25px;
+min-width:0.4em;
+font-style:normal;
+-moz-font-feature-settings: normal;
+-webkit-font-feature-settings: normal;
+-ms-font-feature-settings: normal;
+font-feature-settings: normal;
+}
+.lettrine .lapo {
+font-weight:100;
+font-size: 0.8em;
+line-height: 0.08em;
+position: relative;
+top: -0.17em;
+letter-spacing:-0.1em;
+}
+.lettrine .guillemet {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight:100;
+font-size: 0.8em;
+margin-left: -0.35em;
+vertical-align: bottom;
+-moz-font-feature-settings: normal;
+-webkit-font-feature-settings: normal;
+-ms-font-feature-settings: normal;
+font-feature-settings: normal;
+}
+
+.type_encadre .lettrine {
+font-weight:normal;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+}
+
+.type_encadre.blog .lettrine {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-weight: 800;
+}
+
+.exergue, blockquote.exergue {
+float: right;
+font-weight: 300;
+margin: 7px 0 25px 30px;
+padding: 25px 25px 30px 25px;
+width: 430px;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-size:1.4em;
+line-height: 1.2em;
+background: #be2e0d;
+color: #fff;
+text-align:center;
+}
+.exergue, .exergue i {
+font-style: normal;
+}
+span.exergue span {
+font-weight: normal;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+}
+p .exergue {
+margin: 25px 30px 25px -80px;
+}
+p .exergue p {
+margin: 0.8em 0 0.8em 0;
+}
+
+/* dates / auteurs
+---------------------------------------------- */
+
+.dates_auteurs, .lesauteurs {
+color: #999999;
+}
+
+.lesauteurs .bio {
+margin: 0 0 15px 35%;
+}
+.lesauteurs .bio a {
+color: #666666;
+}
+.lesauteurs .bio a:hover {
+color: #be2e0d;
+}
+
+.dates_auteurs, .lesauteurs .bio {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+}
+.dates_auteurs .auteurs, .dates_auteurs {
+-moz-font-feature-settings: 'smcp';
+-webkit-font-feature-settings: 'smcp';
+-ms-font-feature-settings: 'smcp';
+font-feature-settings: 'smcp';
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+line-height:1.15em;
+}
+
+.liste .dates_auteurs {
+font-size: 1.1em;
+}
+
+.dates_auteurs .auteurs {
+display:inline;
+color: #333333;
+}
+
+.dates_auteurs .auteurs a, .lesauteurs .nom a {
+color: #333333;
+}
+.dates_auteurs .auteurs a:hover, .unauteur .nom a:hover {
+color: #be2e0d;
+}
+
+.dates_auteurs .lieu {
+color: #666666;
+text-transform: lowercase;
+}
+.dates_auteurs .lieu span {
+color: #bbbbbb;
+font-size:0.8em;
+}
+.blogs .dates_auteurs .lieu span,
+.enune .dates_auteurs .lieu span {
+color: inherit;
+}
+
+.dates_auteurs span.auteurs span, .lesauteurs span {
+font-weight:normal;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+-moz-font-feature-settings: 'smcp';
+-webkit-font-feature-settings: 'smcp';
+-ms-font-feature-settings: 'smcp';
+font-feature-settings: 'smcp';
+}
+.dates_auteurs span.et, .lesauteurs span.et {
+color: #999999;
+}
+
+.lesauteurs {
+font-size: 1.08em;
+margin: 20px 160px 20px 0;
+text-align: right;
+}
+
+.lesauteurs .nom {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-size: 1.25em;
+text-align:inherit;
+margin: 0 0 1px 0;
+-moz-font-feature-settings: 'smcp';
+-webkit-font-feature-settings: 'smcp';
+-ms-font-feature-settings: 'smcp';
+font-feature-settings: 'smcp';
+color: #333333;
+}
+
+/* apercu
+---------------------------------------------- */
+
+.apercu {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+background: url(images/oeilbleu.png) no-repeat 0 center;
+color: #6b909e;
+display:inline-block;
+padding: 7px 0 8px 28px;
+font-weight:normal;
+-moz-font-feature-settings: 'smcp';
+-webkit-font-feature-settings: 'smcp';
+-ms-font-feature-settings: 'smcp';
+font-feature-settings: 'smcp';
+text-transform: lowercase;
+font-size:1em;
+}
+.liste .apercu, .liste_vignettes .apercu {
+background: url(images/oeilbleu-mini.png) no-repeat 0 66%;
+padding: 0 0 0 20px;
+position:relative;
+margin-left: 3px;
+}
+.cartouche .apercu {
+float:right;
+display:block;
+margin:-7px 0 -7px 10px;
+padding: 7px 0 8px 28px;
+}
+
+
+a.partage {
+display: inline-block;
+float: right;
+margin: 2px 0 0 10px;
+background: url(images/partage.png) no-repeat 0 0;
+cursor: pointer;
+display: block;
+height: 18px;
+overflow: hidden;
+width: 20px;
+}
+a.partage:hover {
+background: url(images/partage.png) no-repeat 0 -18px;
+}
+
+a.ecouter_son {
+display: inline-block;
+float: right;
+margin: 2px 0 0 10px;
+background: url(images/son.png) no-repeat 0 0;
+cursor: pointer;
+display: block;
+height: 18px;
+overflow: hidden;
+width: 20px;
+}
+a.ecouter_son:hover {
+background: url(images/son.png) no-repeat 0 -18px;
+}
+
+#partage {
+margin-top: 30px;
+margin-bottom: 30px;
+padding-top: 20px;
+border-top: 1px dashed #cccccc;
+vertical-align: baseline;
+padding-bottom: 10px;
+border-bottom: 1px dashed #cccccc;
+}
+
+#partage h2 {
+font-size: 1.8em;
+margin-right: 10px;
+display:inline-block;
+vertical-align: baseline;
+}
+#partage h2 span {
+color: #cccccc;
+}
+.icone-partage {
+height: 23px;
+overflow: hidden;
+width: 25px;
+margin-right: 6px;
+display: inline-block;
+vertical-align: baseline;
+}
+
+#partage a, #partage span.commea {
+background: url(images/icones-partage.png) no-repeat 0 0;
+width: 48px;
+height: 48px;
+color: transparent;
+display:inline-block;
+vertical-align: baseline;
+margin-right: 5px;
+}
+#partage a.zinc {
+background: url(images/icones-partage.png) no-repeat -141px 0;
+}
+#partage a.zinc:hover {
+background: url(images/icones-partage.png) no-repeat -141px -47px;
+}
+
+#partage a.seenthis {
+background: url(images/icones-partage.png) no-repeat -94px 0;
+}
+#partage a.seenthis:hover {
+background: url(images/icones-partage.png) no-repeat -94px -47px;
+}
+
+#partage a.facebook {
+background: url(images/icones-partage.png) no-repeat -47px 0;
+}
+#partage a.facebook:hover {
+background: url(images/icones-partage.png) no-repeat -47px -47px;
+}
+
+#partage a.twitter {
+background: url(images/icones-partage.png) no-repeat 0 0;
+}
+#partage a.twitter:hover {
+background: url(images/icones-partage.png) no-repeat 0 -47px;
+}
+
+#partage .commea.mail {
+background: url(images/icones-partage.png) no-repeat -188px 0;
+}
+#partage .commea.mail:hover {
+background: url(images/icones-partage.png) no-repeat -188px -47px;
+cursor: pointer;
+}
+
+.formulaire_recommander {
+max-width: 650px;
+}
+
+
+
+
+
+/* DL/DT et Documents
+---------------------------------------------- */
+
+img {
+max-width:  100%;
+height: auto !important;
+}
+iframe {
+max-width:  100% !important;
+}
+iframe.center {
+margin:1.8em 18% 1.2em 9%;
+}
+
+figcaption, .texte figcaption {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+margin: 10px 0 0 0;
+max-width: 100%;
+font-weight: 400;
+}
+
+.spip_documents {
+text-align: center;
+line-height: 1em;
+}
+
+figure.spip_documents {
+margin: 0 0 10px 0;
+max-width: 100%;
+}
+
+.spip_documents_left {
+margin-right: 20px;
+}
+
+.spip_documents_right {
+margin-left: 20px;
+}
+
+figure .limage {
+margin: 0 0 8px 0;
+line-height: 0em;
+}
+
+dd {
+margin: 0 0 10px 30px;
+}
+
+.spip_doc_titre, .spip_documents .spip_doc_titre {
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+font-size: 0.75em;
+font-weight:normal;
+text-align: left;
+margin: 0 auto 0 auto;
+line-height: 1.3em;
+max-width: 100%;
+}
+
+.categorie-publication.variante-atlas .spip_doc_titre {
+font-size: 1em;
+font-weight: 700;
+}
+
+.rubrique_publication.variante-manuel .spip_doc_titre {
+font-weight: 500;
+}
+
+.spip_doc_descriptif {
+clear: both;
+font-size: 0.75em;
+text-align: left;
+margin: 0 auto 0 auto;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+color: #888888;
+line-height: 1.3em;
+max-width: 100%;
+}
+
+.rubrique_publication.variante-manuel .spip_doc_titre,
+.rubrique_publication.variante-manuel .spip_doc_descriptif {
+font-size: 0.8em;
+color: #333;
+line-height: 1.35em;
+}
+
+.spip_documents.spip_documents_center {
+text-align:center;
+display:block;
+margin: 1.8em 0 1.5em;
+}
+
+.livresdumois .texte .spip_documents.spip_documents_center {
+float:left;
+text-align:left;
+}
+
+.spip_documents {	
+margin-top:19px;
+}
+
+.spip_documents.justecol, .spip_documents.xs {	
+margin:1.8em 18% 1.2em 9%;
+}
+
+.spip_documents.spip_documents_right {
+margin: 5px 0 15px 20px;
+}
+.spip_documents.spip_documents_left, .livresdumois .texte .spip_documents_center {
+margin: 5px 20px 15px 0;
+}
+
+.spip_documents.spip_documents_left {
+margin: 5px 30px 15px 0;
+}
+
+.spip_documents.spip_documents_right {
+margin: 5px 0 15px 30px;
+}
+
+.spip_documents.spip_documents_left, .spip_documents.spip_documents_right {
+margin-top: 5px;
+}
+.chapo .spip_documents.spip_documents_left, .chapo .spip_documents.spip_documents_right {
+margin-top: 9px;
+}
+
+/*  ------------------------------------------
+/* Tableaux
+---------------------------------------------- */
+
+table.spip {
+border:0;
+border-width: 1px;
+border-collapse:collapse;
+border-spacing:0;
+line-height:normal;
+margin: 1em auto 1em auto;
+font-size: 0.9em;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+display:block;
+max-width: 100%;
+overflow:scroll;
+}
+
+table.spip caption {
+caption-side:top;
+font-weight:bold;
+margin-left:auto;
+margin-right:auto;
+text-align:left;
+margin: 1em 0 1.1em 0;
+font-size: 1.1em;
+}
+
+table.spip th, table.spip td {
+border:1px solid #cccccc;
+padding:0.5em;
+text-align:center;
+vertical-align: middle;
+}
+
+table.spip th {
+background:#666666;
+color: #ffffff;
+border:1px solid #444;
+}
+
+table.spip tr.row_even {
+background:#ffffff;
+}
+
+table.spip tr.row_odd {
+background:#eeeeee;
+}
+
+.texte table.spip p {
+margin: 0.8em 0 0.8em 0;
+}
+
+
+/*  ------------------------------------------
+/* 	Formulaires
+/*  ------------------------------------------ */
+
+input, .formulaire_spip input, .formulaire_spip input.text, textarea, .formulaire_spip textarea {
+border: 1px solid #bbb;
+padding: 5px 5px 6px 7px;
+transition-duration:.5s;
+transition-property: background;
+-moz-transition-duration:.5s;
+-moz-transition-property: background;
+-webkit-transition-duration:.5s;
+-webkit-transition-property: background;
+box-sizing: border-box;
+max-width: 100%;
+box-sizing:border-box;
+}
+input:focus, .formulaire_spip input:focus, .formulaire_spip input.text:focus, textarea:focus, .formulaire_spip textarea:focus {
+border: 1px solid #f6e9d9;
+background: #f6e9d9;
+}
+.formulaire_forum .saisie_titre input.text, .formulaire_forum .saisie_titre textarea,
+.formulaire_spip textarea, .formulaire_spip select {
+width: 100%;
+}
+
+#conteneur .formulaire_spip {
+font-size:1.2em;
+}
+.texte .formulaire_spip, #conteneur .texte .formulaire_spip {
+font-size:1em;
+}
+
+.texte .formulaire_spip ul {
+margin: 0;
+padding: 0;
+}
+.texte .formulaire_spip ul li {
+margin: 0;
+padding: 0.5em 0;
+list-style: none;
+}
+
+.formulaire_spip label {
+font-weight: normal;
+margin: 0 0 5px 0;
+}
+
+.formulaire_spip .boutons input, .bouton a, .bouton input, input.submit, input[type="submit"], button, span.bouton {
+border: 0;
+border-radius: 15px;
+padding: 5px 10px;
+background: #f6e9d9;
+color: #333333;
+transition-duration:.2s;
+transition-property: background;
+-moz-transition-duration:.2s;
+-moz-transition-property: background;
+-webkit-transition-duration:.2s;
+-webkit-transition-property: background;
+margin-left: 0.5em;
+font-family: Walbaumgrot, helvetica, arial, sans-serif;
+}
+.formulaire_spip .boutons input:hover, .bouton a:hover, .bouton input:hover,  input.submit:hover, input[type="submit"]:hover, button:hover, a:hover span.bouton {
+background: #be2e0d;
+color: #ffffff;
+cursor:pointer;
+}
+.formulaire_spip .boutons input.on, input.submit.on, .bouton a.on {
+background: #333333;
+color: #ffffff;
+}
+
+.pasbouton a, .pasbouton a:hover {
+padding: 0;
+background:0;
+}
+
+.bouton .close {
+display:none;
+font-weight: bold;
+margin-left:3px;
+}
+.bouton .close:hover {
+color: #000000;
+}
+
+.formulaire_ecrire_auteur {
+margin-top: 20px;
+}
+
+.baseline .bouton {
+margin: 30px 0 0 0;
+}
+.baseline .bouton a {
+font-size:0.9em;
+margin: 0 20px 0 0;
+}
+
+/* 	page login */
+
+.page_login #hierarchie, .page_login #formulaire_menu_lang, .page_login .formulaire_login legend, .page_login .soustitre {
+display:none;
+}
+.formulaire_login {
+max-width: 460px;
+margin-left: 75px;
+}
+.formulaire_login input.text, .formulaire_login input[type=text], .formulaire_login input[type=password] {
+width: 330px;
+}
+.formulaire_login .editer_password .details {
+color: #bbb;
+margin-top:3px;
+font-size: 0.9em;
+}
+#pass_securise {
+margin-left: 10px;
+background: url(images/cadenas.png) no-repeat 0 center;
+width: 16px;
+height: 18px;
+display: inline-block;
+}
+#pass_securise img {
+display:none;
+}

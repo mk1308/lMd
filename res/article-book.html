@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+<head>
+  <meta name="generator" content=
+  "{{ title }}" />
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset={{ charset }}" />
+
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ stylesheet }}" type=
+  "text/css" />
+</head>
+
+<body>
+  <div class="c-kap">
+    <ul class="c-nav">
+      <li class="c-navoverview"><a href=
+      "{{ home }}">Inhalt</a></li>
+
+      <li class="c-navnext"><a href=
+      "{{ next }}">nächster
+      Artikel</a></li>
+    </ul>
+
+    <div class="c-article-header">
+      <h2><span class="c-article-headerkicker">{{ teaser }}</span><span class=
+      "c-article-headerheadline">{{ title }}</span></h2>
+
+      <p class="c-article-headerauthor"> {{ author }}</p>
+
+      <p class="c-article-headertext">{{ initial }}</p>
+
+    </div>
+
+    <div class="c-article-body">
+      <p class="c-article-body">{{ first_letter }}{{ first }}{{ content  }}</p>
+    </div>
+
+    <div class="c-infobox">
+      <h3 class="c-infobox-title">Fußnoten</h3>
+
+      {{ footnotes }}
+      
+    </div>
+
+    <p class="c-pagina"><a href=
+    "../page.html">Inhalt</a></p>
+
+  </div>
+</body>
+</html>

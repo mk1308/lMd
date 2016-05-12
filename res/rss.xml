@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Ausgabe vom {{ date }}]]></title>
+        <description><![CDATA[Deutschsprachige Ausgabe der französischen
+       Monatszeitung Le Monde Diplomatiqe für internationale Politik.]]></description>
+        <link>http://monde-diplomatique.de</link>
+        <image>
+            <url>{{ logo }}</url>
+            <title>"Deutsche Ausgabe LE MONDE diplomatique"</title>
+            <link>http://monde-diplomatique.de</link>
+        </image>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>{{ builtdate }}</lastBuildDate>
+        <atom:link href="http://localhost:5000/rss" rel="self" type="application/rss+xml"/>
+        <copyright><![CDATA[taz, die Tageszeitung – 2016]]></copyright>
+        <language><![CDATA[de]]></language>
+        <category><![CDATA[Le Monde diplomatique, Politik, Analyse,
+       Umwelt, Wirtschaft, Gesellschaft, Kultur, Hintergrundinformationen,
+       Globalisierung]]></category>
+        <managingEditor><![CDATA[taz, die Tageszeitung – 2016]]></managingEditor>
+
+      {% for article in articles %}
+        <item>
+            <title><![CDATA[{{ article['title'] }}]]></title>
+            <description><![CDATA[{{ article['abstract'] }}]]></description>
+            <link>http://localhost:8000/{{ article['href'] }}</link>
+            <guid isPermaLink="false">{{ article['guid'] }}</guid>
+            <pubDate>{{pubdate}}</pubDate>
+            <dc:language>de</dc:language>
+            <dc:abstract><![CDATA[{{ article['abstract'] }}]]> </dc:abstract>
+        </item>
+      {% endfor %}
+    </channel>
+</rss>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" />
+  <meta name="generator" content="{{ title }}" />
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8" />
+
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ stylesheet }}" type=
+  "text/css" />
+</head>
+
+<body>
+  <div class="contenu-principal">
+    <div class="cartouche">
+      <p class="surtitre">{{ teaser }}</p>
+
+      <h1 style="color: rgb(190, 18, 13);" class=
+      "h1">{{ title }}</h1>
+
+      <div class="chapo">
+        <p>{{ initial }}</p>
+      </div>
+
+      <div class="dates_auteurs">
+         <span class="auteurs">{{ author }}</span>&nbsp;
+      </div>
+    </div>
+
+    <div class="texte">
+      <p>
+        <span class="mot-lettrine"><span 
+            style="color: rgb(190, 18, 13);" 
+            class="lettrine">{{ first_letter }}
+        </span>{{ chunk }}</span>
+        {{ first }}
+      </p>
+
+      {{ content }}
+
+    </div>
+    <div class="footnotes">
+      {{ footnotes }}
+    </div>
+  </div>
+</body>
+</html>

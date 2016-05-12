@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+<head>
+  <meta name="generator" content=  "" />
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset={{ charset }}" />
+  <meta name="author" content="Deutsche Ausgabe LE MONDE diplomatique" />
+  <meta name="publisher" content="taz, die Tageszeitung" />
+  <meta name="company" content="taz Entwicklungs GmbH & Co.Medien KG" />
+  <meta name="date" content=" {{ date }} " />
+  <meta name="description" content="Deutschsprachige Ausgabe der französischen\
+       Monatszeitung Le Monde Diplomatiqe für internationale Politik." />
+  <meta name="date" content="Le Monde diplomatique, Politik, Analyse,\
+       Umwelt, Wirtschaft, Gesellschaft, Kultur, Hintergrundinformationen,\
+       Globalisierung" />
+  <title>{{ date }}</title>
+  <link rel="stylesheet" href="{{ stylesheet }}" type="text/css" />
+</head>
+
+<body>
+
+  <div class="chapter c-departments">
+    <img src="{{ logo }}"/>
+<!--    <h1 class="c-departments__title">{{ title }}</h1>
+-->    <p class="c-departments__subtitle">{{ date }}</p>
+
+<!--    <h1 class="c-pagina">{{ title }}</h1>
+-->
+    <ul>
+      {% for article in articles %}
+      <li class="c-teaser">
+        <h3>
+          <span class="c-teaser__kicker">{{ article['author'] }}</span>
+          <a class="c-teaser__headline" href="{{ article['href'] }}">{{ article['title'] }}</a>
+        </h3>
+
+        <p class="c-teaser__text">{{ article['description'] }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>

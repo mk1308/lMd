@@ -1,0 +1,151 @@
+@font-face{
+  font-family:SZ Sans; 
+  font-stretch:normal; 
+  font-style:normal; 
+  font-weight:700; 
+  src:url(fonts/SZSans-Bold.otf) format("opentype")
+} 
+body,div,h1,h2,h3,html,li,p,ul{
+  font-size:100%; 
+  font-weight:400; 
+  margin:0; 
+  padding:0
+} 
+a{
+  color:inherit; 
+  text-decoration:underline
+} 
+a:focus,a:hover{
+  text-decoration:none
+} 
+ul{
+  list-style-type:none
+} 
+html{
+  background:#fff; 
+  color:#333; 
+  font-family:georgia,times,serif; 
+  line-height:1.4; 
+  text-align:left!important
+} 
+b,strong{
+  font-weight:700
+} 
+em,i{
+  font-style:italic
+} 
+.c-kap{
+  padding:3.75em 1.25em
+} 
+.o-hidden{
+  display:none
+} 
+.c-article-body-subheadline{
+  font-family:SZ Sans,Neue Helvetica,Helvetica,sans-serif; 
+  font-size:1.5em; 
+  font-weight:700; 
+  line-height:1.1; 
+  margin:.83333em 0
+} 
+.c-article-body p{
+  margin:1.25em 0
+} 
+.c-article-header-headline,.c-article-header-kicker{
+  display:block
+} 
+.c-article-header-kicker{
+  font-weight:400
+} 
+.c-article-header-headline{
+  font-family:SZ Sans,Neue Helvetica,Helvetica,sans-serif; 
+  font-size:2.25em; 
+  font-weight:700; 
+  line-height:1.1; 
+  margin-top:.13889em
+} 
+.c-article-header-text{
+  font-size:1.5em; 
+  margin-top:.10417em
+} 
+.c-article-header-author{
+  margin:1.25em 0; 
+  text-transform:uppercase
+} 
+.c-infobox{
+  margin:2.22222em 0 2.22222em 1.66667em
+} 
+.c-infobox-title{
+  font-size:1.125em; 
+  margin-bottom:.13889em
+} 
+.c-image-text-module-title,.c-infobox-title{
+  font-family:SZ Sans,Neue Helvetica,Helvetica,sans-serif; 
+  font-weight:700
+} 
+.c-image-text-module-title{
+  font-size:1.5em; 
+  margin-top:.20833em
+} 
+.c-image-text-module-text{
+  margin-bottom:1.25em
+} 
+.c-image{
+  margin:2.22222em 0
+} 
+.c-image-title{
+  font-family:SZ Sans,Neue Helvetica,Helvetica,sans-serif; 
+  font-size:1.125em; 
+  font-weight:700
+} 
+.c-image-caption{
+  font-size:.875em
+} 
+.c-departments-title{
+  font-family:SZ Sans,Neue Helvetica,Helvetica,sans-serif; 
+  font-size:2em; 
+  font-weight:700
+} 
+.c-departments-subtitle{
+  font-size:1.25em; 
+  margin-bottom:1.5em
+} 
+.c-departments-item{
+  letter-spacing:1px; 
+  margin:1.25em 0; 
+  text-transform:uppercase
+} 
+.c-departments-item:last-child,.c-nav{
+  margin-bottom:2.5em
+} 
+.c-nav-overview{
+  float:left
+} 
+.c-nav-overview--standalone{
+  float:none
+} 
+.c-nav-next{
+  text-align:right
+} 
+.c-pagina{
+  font-weight:400; 
+  letter-spacing:1px; 
+  margin-bottom:1.875em; 
+  text-transform:uppercase
+} 
+.c-teaser{
+  margin:1.875em 0
+} 
+.c-teaser-headline,.c-teaser-kicker{
+  display:block
+} 
+.c-teaser-kicker{
+  font-weight:400
+} 
+.c-teaser-headline{
+  font-family:SZ Sans,Neue Helvetica,Helvetica,sans-serif; 
+  font-size:1.375em; 
+  font-weight:700; 
+  line-height:1.1; 
+  margin-bottom:.22727em
+} 
+
