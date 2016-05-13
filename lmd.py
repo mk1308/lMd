@@ -146,7 +146,7 @@ def get_issue_date(y=None,m=None):
   if not m:
     m=today.month -1
   dates= map(lambda w:w[get_wd(y,m)],cal.monthdayscalendar(y,m))
-  d = dates[1] if dates[1] > 7 else dates[2]
+  d = dates[1] if dates[1] > 6 else dates[2]
   return dt.date(y,m,d)
 
 def get_wd(y,m):
