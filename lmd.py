@@ -16,16 +16,17 @@ class Page:
     if template_name: self.template_name=template_name
     self.load_template( self.template_name )
     self.page_name = pname
-    self.dic = dict()
+    self.dic = args if args else dict()
     
   def get_content( self ):
     return self.dic
     
-  def make( self, fname, **args ):
+  def make( self, fname=None, **args ):
     if args:
       self.dic.update(**args)
-    soup = self.fetch_soup( fname )
-    self.parse( soup )
+    if fname:
+      soup = self.fetch_soup( fname )
+      self.parse( soup )
     response = self.render_template(**self.dic)
     if self.page_name:
       self.dump( response )
@@ -174,10 +175,27 @@ if __name__=='__main__':
   pubdate = ' '
   
   @app.route('/')
-  def index(): 
-    datestring = get_issue_date().strftime('%Y-%m-%d')
-    loc = '/'+datestring
-    return redirect(loc)
+  def index():
+    '''
+    Die Überblicksseite mit den links zu den Ausgaben
+    '''
+    issues_page = Page(
+        template_name = "res/entry-page.html",
+        charset = "utf8",
+        stylesheet = url_for('static',filename='stylesheet.css'), 
+        logo = url_for('static',filename='logo.png') )
+    # Schleife mit aktuellem Monat initialisieren
+    m = dt.date.today().month
+    issues = list()
+    while m > 0:
+      dateobj = get_issue_date( m=m )           # Bestimme Ausgabedatum
+      datestring = dateobj.strftime('%Y-%m-%d') # ...für den link
+      date = dateobj.strftime('%d. %B %Y')      # ...für den Text
+      href = '/'+datestring     
+      issues.append( dict(href=href,date=date))
+      m = m-1
+    response = issues_page.make( articles=issues )
+    return response
 
   @app.route('/res/<path>')
   def static_proxy(path):
