@@ -122,8 +122,12 @@ class ArticlePage( Page ):
     self.dic.update(**args)
 
 def make_paper( root, date, is_online=True ):
+  '''
+  Produziert die komplette Ausgabe als xhtml
+  '''
   src_root = "http://monde-diplomatique.de" if is_online else "monde-diplomatique.de"
   index_path = "%s/archiv-text?text=%s" % (src_root,date)
+  href_index = "../index.html"
   index = IndexPage('%s/index.html' % root )
   index.make( index_path, stylesheet = 'res/stylesheet.css', logo = 'res/logo.png' )
   article_refs = map( lambda entry : entry['href'], index.get_content()['articles'] )
@@ -134,7 +138,7 @@ def make_paper( root, date, is_online=True ):
     next_path = '%s/%s' % (src_root,article_refs[ (i+1) % len(article_refs) ])
     next_target = '%s' % (p.basename( next_path )) 
     article=ArticlePage( target_path,'res/article-book.html', stylesheet = '../res/stylesheet.css', date = date )
-    article.make(src_path,next=next_target)
+    article.make(src_path,home=href_index,next=next_target)
     i+=1
 
 cal = Calendar()
