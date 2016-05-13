@@ -133,7 +133,7 @@ def make_paper( root, date, is_online=True ):
     target_path = '%s/%s' % (root,article_refs[i])
     next_path = '%s/%s' % (src_root,article_refs[ (i+1) % len(article_refs) ])
     next_target = '%s' % (p.basename( next_path )) 
-    article=ArticlePage( target_path,'res/article-book.html', stylesheet = 'res/stylesheet.css', date = date )
+    article=ArticlePage( target_path,'res/article-book.html', stylesheet = '../res/stylesheet.css', date = date )
     article.make(src_path,next=next_target)
     i+=1
 

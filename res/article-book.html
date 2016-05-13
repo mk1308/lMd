@@ -14,28 +14,29 @@
 </head>
 
 <body>
-  <div class="c-kap">
+  <div class="chapter">
     <ul class="c-nav">
-      <li class="c-navoverview"><a href=
+      <li class="c-nav__overview"><a href=
       "{{ home }}">Inhalt</a></li>
 
-      <li class="c-navnext"><a href=
+      <li class="c-nav__next"><a href=
       "{{ next }}">nächster
       Artikel</a></li>
     </ul>
 
     <div class="c-article-header">
-      <h2><span class="c-article-headerkicker">{{ teaser }}</span><span class=
+      <h2><span class="c-article-header__kicker">{{ teaser }}</span><span class=
       "c-article-headerheadline">{{ title }}</span></h2>
 
-      <p class="c-article-headerauthor"> {{ author }}</p>
+      <p class="c-article-header__author"> {{ author }}</p>
 
-      <p class="c-article-headertext">{{ initial }}</p>
+      <p class="c-article-header__text">{{ initial }}</p>
 
     </div>
 
     <div class="c-article-body">
-      <p class="c-article-body">{{ first_letter }}{{ first }}{{ content  }}</p>
+      <p class="c-article-body">{{ first_letter }}{{ chunk }}{{ first }}</p>
+	  {{ content  }}
     </div>
 
     <div class="c-infobox">
@@ -46,8 +47,8 @@
     </div>
 
     <p class="c-pagina"><a href=
-    "../page.html">Inhalt</a></p>
-
+    {{ home }}>Inhalt</a></p>
+	
   </div>
 </body>
 </html>
