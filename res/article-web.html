@@ -12,40 +12,123 @@
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ stylesheet }}" type=
   "text/css" />
+  <link rel="stylesheet" href="{{ stylesheet_foundation }}" type=
+  "text/css" />
+<!--  <script src="{{ js_jquery }}"></script>-->
+<!--  <script src="{{ js_what_input }}"></script>-->
+<!--  <script src="{{ js_foundation }}"></script>-->
+<!--  <script src="{{ js_app }}"></script>-->
 </head>
 
-<body>
-  <div class="contenu-principal">
-    <div class="cartouche">
-      <p class="surtitre">{{ teaser }}</p>
+<body style="background-color: rgb(238, 238, 238);">
 
-      <h1 style="color: rgb(190, 18, 13);" class=
-      "h1">{{ title }}</h1>
+  <div class="off-canvas-wrapper">
 
-      <div class="chapo">
-        <p>{{ initial }}</p>
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<!--  Die linke Spalte zum aufschieben  -->
+
+      <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+        <link rel="stylesheet" href="{{ stylesheet_content }}" type=
+        "text/css" />
+        <div class="chapter c-departments">
+          <h1 class="c-departments__title">Deutsche Ausgabe</h1>
+          <ul>
+            {% for issue in issues %}
+            <li class="c-teaser">
+              <h3>
+                <a class="c-teaser__headline" href="{{ issue['href'] }}">{{ issue['date'] }}</a>
+              </h3>
+
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
       </div>
 
-      <div class="dates_auteurs">
-         <span class="auteurs">{{ author }}</span>&nbsp;
+<!--Der eigentliche Inhalt    -->
+
+      <div class="contenu-principal" style="background: rgb(255,255,255);
+	    padding: 20px 30px 0 30px;
+	    width: 960px;
+	    margin: 0 auto 50px auto;
+	    position: relative;
+    ">
+        <div class="row" style="margin: 15px 0 60px 0;	width: 520px;	height: 54px;	overflow: hidden;">
+          <a data-toggle="offCanvasLeft">
+            <img src="{{ logo }}" style="height: auto !important;"/>
+          </a>
+        </div>
+        <div class="cartouche">
+          <p class="surtitre">{{ teaser }}</p>
+
+    <!--      <h1 style="color: rgb(190, 18, 13);" class=-->
+          <h1 style="color: rgb(99, 99, 104);" class=
+          "c-article-body__headline">{{ title }}</h1>
+
+          <div class="chapo">
+            <p>{{ initial }}</p>
+          </div>
+
+          <div class="dates_auteurs">
+             <span class="auteurs">{{ author }}</span>&nbsp;
+          </div>
+        </div>
+
+        <div class="texte">
+          <p>
+            <span class="mot-lettrine"><span 
+                style="color: rgb(99, 99, 104);" 
+                class="lettrine">{{ first_letter }}
+            </span>{{ chunk }}</span>
+            {{ first }}
+          </p>
+
+          {{ content }}
+
+        </div>
+
+    <!--    Fussnoten     -->
+
+        <div class="footnotes">
+          {{ footnotes }}
+        </div>
+
+    <!--    Zur Inhaltsangabe     -->
+
+        <p><a data-toggle="exampleModal">Inhalt</a></p>
+        <div class="large reveal" id="exampleModal" data-reveal>
+          <link rel="stylesheet" href="{{ stylesheet_content }}" type=
+          "text/css" />
+          <div class="chapter c-departments">
+            <img src="{{ current['logo'] }}"/>
+        <!--    <h1 class="c-departments__title">{{ title }}</h1>
+        -->    <p class="c-departments__subtitle">{{ current['date'] }}</p>
+
+        <!--    <h1 class="c-pagina">{{ title }}</h1>
+        -->
+            <ul>
+              {% for article in current['articles'] %}
+              <li class="c-teaser">
+                <h3>
+                  <span class="c-teaser__kicker">{{ article['author'] }}</span>
+                  <a class="c-teaser__headline" href="/{{ article['href'] }}">{{ article['title'] }}</a>
+                </h3>
+
+                <p class="c-teaser__text">{{ article['description'] }}</p>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="texte">
-      <p>
-        <span class="mot-lettrine"><span 
-            style="color: rgb(190, 18, 13);" 
-            class="lettrine">{{ first_letter }}
-        </span>{{ chunk }}</span>
-        {{ first }}
-      </p>
-
-      {{ content }}
-
-    </div>
-    <div class="footnotes">
-      {{ footnotes }}
     </div>
   </div>
+  <script src="{{ js_jquery }}"></script>
+  <script src="{{ js_what_input }}"></script>
+  <script src="{{ js_foundation }}"></script>
+  <script src="{{ js_app }}"></script>
 </body>
 </html>

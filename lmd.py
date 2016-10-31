@@ -129,7 +129,7 @@ def make_paper( root, date, is_online=True ):
   index_path = "%s/archiv-text?text=%s" % (src_root,date)
   href_index = "../index.html"
   index = IndexPage('%s/index.html' % root )
-  index.make( index_path, stylesheet = 'res/stylesheet.css', logo = 'res/logo.png' )
+  index.make( index_path, stylesheet = 'res/index_styles.css', logo = 'res/logo.png' )
   article_refs = map( lambda entry : entry['href'], index.get_content()['articles'] )
   i=0
   while i < len(article_refs):
@@ -137,7 +137,7 @@ def make_paper( root, date, is_online=True ):
     target_path = '%s/%s' % (root,article_refs[i])
     next_path = '%s/%s' % (src_root,article_refs[ (i+1) % len(article_refs) ])
     next_target = '%s' % (p.basename( next_path )) 
-    article=ArticlePage( target_path,'res/article-book.html', stylesheet = '../res/stylesheet.css', date = date )
+    article=ArticlePage( target_path,'res/article-book.html', stylesheet = '../res/index_styles.css', date = date )
     article.make(src_path,home=href_index,next=next_target)
     i+=1
 
@@ -186,7 +186,7 @@ if __name__=='__main__':
     issues_page = Page(
         template_name = "res/entry-page.html",
         charset = "utf8",
-        stylesheet = url_for('static',filename='stylesheet.css'), 
+        stylesheet = url_for('static',filename='index_styles.css'), 
         logo = url_for('static',filename='logo.png') )
     # Schleife mit aktuellem Monat initialisieren
     m = dt.date.today().month
@@ -199,6 +199,7 @@ if __name__=='__main__':
       issues.append( dict(href=href,date=date))
       m = m-1
     response = issues_page.make( articles=issues )
+    content['issues'] = issues
     return response
 
   @app.route('/res/<path>')
@@ -220,10 +221,11 @@ if __name__=='__main__':
   @app.route('/<date>')
   def get_issue(date):
     pubdate = date
-    stylesheet = url_for('static',filename='stylesheet.css')
+    stylesheet = url_for('static',filename='index_styles.css')
     logo = url_for('static',filename='logo.png')
     issue_path = "%s/archiv-text?text=%s" % (src_root, date)
     issue = IndexPage()
+    content['current']=issue.get_content()
     i=0
     response = issue.make( issue_path, stylesheet = stylesheet, logo = logo )
     article_refs = map( lambda entry : entry['href'], issue.get_content()['articles'] )
@@ -236,13 +238,29 @@ if __name__=='__main__':
   
   @app.route('/artikel/<article>')
   def get_article(article):
-    stylesheet = url_for('static',filename='reduced_styles.css')
+    stylesheet = url_for('static',filename='article_styles.css')
+    stylesheet_content = url_for('static',filename='index_styles.css')
+    stylesheet_foundation = url_for('static',filename='res/css/foundation.css')
+    js_foundation = url_for('static',filename='res/js/vendor/foundation.js')
+    js_jquery = url_for('static',filename='res/js/vendor/jquery.js')
+    js_what_input = url_for('static',filename='res/js/vendor/what-input.js')
+    js_app = url_for('static',filename='res/js/app.js')
     article_path = "%s/artikel/%s" % (src_root,article)
     article_i = ArticlePage( )   
+    print 'Artikel %s' % article 
     return article_i.make(article_path,
+        logo = url_for('static', filename="logofficiel-enlong.png"),
+        issues = content['issues'],
+        current = content[ 'current' ],
         next=content[ 'artikel/' + article ],
         home = url_for('index',filename = pubdate),
-        stylesheet = stylesheet )
+        stylesheet = stylesheet,
+        stylesheet_content = stylesheet_content,
+        stylesheet_foundation = stylesheet_foundation,
+        js_foundation = js_foundation,
+        js_jquery = js_jquery,
+        js_what_input = js_what_input,
+        js_app = js_app )
   
   @app.route('/fonts/<fname>')
   def get_fonts(fname):
