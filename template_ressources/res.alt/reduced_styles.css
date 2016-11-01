@@ -1,0 +1,220 @@
+@font-face{
+  font-family:'Walbaum';
+  src:url(fonts/walbaum10xlpro.woff);
+  font-weight:400;
+  font-style:normal;
+  }
+@font-face{
+  font-family:'Walbaum';
+  src:url(fonts/walbaum10xlproitalic.woff);
+  font-weight:400;
+  font-style:italic;
+  }
+@font-face{
+  font-family:'Walbaum';
+  src:url(fonts/walbaum10xlprobold.woff);
+  font-weight:700;
+  font-style:normal;
+  }
+@font-face{
+  font-family:'Walbaum';
+  src:url(fonts/walbaum10xlprobolditalic.woff);
+  font-weight:700;
+  font-style:italic;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgroteskbook.woff);
+  font-weight:400;
+  font-style:normal;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgroteskbookitalic.woff);
+  font-weight:400;
+  font-style:italic;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgroteskbookbold.woff);
+  font-weight:700;
+  font-style:normal;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgroteskbookbolditalic.woff);
+  font-weight:700;
+  font-style:italic;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgrotesktext.woff);
+  font-weight:500;
+  font-style:normal;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgrotesktextitalic.woff);
+  font-weight:500;
+  font-style:italic;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgrotesktextbold.woff);
+  font-weight:800;
+  font-style:normal;
+  }
+@font-face{
+    font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgrotesktextbolditalic.woff);
+  font-weight:800;
+  font-style:italic;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgrotesklight.woff);
+  font-weight:100;
+  font-style:normal;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgrotesklightitalic.woff);
+  font-weight:100;
+  font-style:italic;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgroteskblack.woff);
+  font-weight:900;
+  font-style:normal;
+  }
+@font-face{
+  font-family:'Walbaumgrot';
+  src:url(fonts/walbaumgroteskblackitalic.woff);
+  font-weight:900;
+  font-style:italic;
+  }
+body{
+  background:rgb(238,238,238);
+  height:auto !important;
+  font-family: Walbaumgrot,helvetica,arial,sans-serif;
+  line-height: normal;
+  font-weight: 400;
+  }
+h1{
+  font-family:Walbaum,Georgia,'Times new roman',serif;
+  font-size:3em;
+  line-height:1.1em;
+  color:#222;
+  font-weight:normal;
+  margin:0 0 15px 0;
+  }
+.c-article-body__subheadline{
+  font-size: 1.6em;
+  font-family: Walbaumgrot,helvetica,arial,sans-serif;
+  font-weight: 400;
+  text-align: left;
+  text-indent: 0px;
+  margin: 2em 120px 1em 80px;
+  clear: both;
+  color: #636368;
+  line-height: 1.1em;
+}
+.contenu-principal{
+  margin:100px 30px 50px 30px;
+  }
+.fine{
+  letter-spacing:-0.13em;
+  }
+.cartouche{
+  margin-bottom:50px;
+  padding-bottom:7px;
+  border-bottom:1px solid #bbb;
+  overflow:hidden;
+  }
+.mot-lettrine{
+  font-style:normal;
+  margin-left:0;
+  font-variant: small-caps;
+  }
+.lettrine{
+  font-size:6.8em;
+  font-family:Walbaumgrot,helvetica,arial,sans-serif;
+  font-weight:800;
+  line-height:1em;
+  display:inline-block;
+  color:#bbb;
+  float:left;
+  margin:-8px 22px 5px -25px;
+  min-width:0.4em;
+  font-style:normal;
+  font-feature-settings:normal;
+  }
+.cartouche .dates_auteurs{
+  margin:30px 0 0 0;
+  padding:7px 0 0 0;
+  font-size:1.25em;
+  color:#999;
+  display:block;
+  text-align:center;
+  border-top:1px solid #bbb;
+  }
+.surtitre,.cartouche .surtitre{
+  margin-bottom:0.50em;
+  font-size:1.3em;
+  font-family:Walbaumgrot,helvetica,arial,sans-serif;
+  font-variant: small-caps;
+  }
+.chapo{
+  font-size:1.4em;
+  line-height:1.4em;
+  margin:0;
+  font-family:Walbaumgrot,helvetica,arial,sans-serif;
+  font-weight:400;
+  padding:0 15px 0 0;
+  overflow:hidden;
+  }
+.chapo p{
+  margin:0.8em 0 0 0;
+  padding:0em;
+  }
+.chapo p:first-child,.chapo p:first-of-type{
+  margin:0;
+  }
+.texte{
+  font-family:Walbaum,Georgia,'Times new roman',serif;
+  font-size:1.15em;
+  line-height:1.4em;
+  margin:0 0 20px 0;
+  position:relative;
+  }
+.texte p{
+  margin:0.8em 160px 0.8em 80px;
+  }
+.texte strong,blockquote strong{
+  font-family:Walbaumgrot,helvetica,arial,sans-serif;
+  }
+.texte h3.spip{
+  font-size:1.6em;
+  font-family:Walbaumgrot,helvetica,arial,sans-serif;
+  font-weight:400;
+  text-align:left;
+  text-indent:0;
+  margin:2em 120px 1em 80px;
+  clear:both;
+  }
+.categorie-numero #entree-numero,.categorie-archives #entree-archives,.categorie-mav #entree-mav,.categorie-valise #entree-valise,.categorie-blogs #entree-blogs,.categorie-cartes #entree-cartes,.categorie-apropos #entree-apropos,.siteblogs #entree-blogs,.categorie_publication #entree-publi,.categorie_apropos #entree-apropos{
+  background:#dedee2;
+  }
+.footnotes{
+  clear: both;
+  font-family: Walbaum,Georgia,"Times new roman",serif;
+  font-size: 1.08em;
+  padding: 5px 0px 0px;
+  border-top: 1px solid #CCC;
+  margin: 50px 160px 50px 30px;
+}
+.c-image__caption{
+  padding-left: 1.8em;
+  text-indent: -1.8em;
+}

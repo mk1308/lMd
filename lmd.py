@@ -10,18 +10,42 @@ from jinja2 import Template
 import threading, locale
 from contextlib import contextmanager
 
+dirname_templates     = "templates"
+dirname_tpl_res       = "template_ressources"
+tpl_entry_page        = "%s/entry-page.html" % dirname_templates
+tpl_index             = "%s/index.html" % dirname_templates
+tpl_article_web       = "%s/article-web.html" % dirname_templates
+tpl_article_book      = "%s/article-book.html" % dirname_templates
+
 class Page:
+  '''
+  Oberklasse für den Zugriff auf Templates.
+  '''
 
   def __init__( self, pname=None, template_name=None, **args):
+    '''
+    pname: Name der Datei, in welche eine zu erzeugende Seite gespeichert werden soll
+    template_name: Dateipfad des zu ladenden Templates
+    args: an das Template zu übergebende Wertepaare
+    '''
     if template_name: self.template_name=template_name
     self.load_template( self.template_name )
     self.page_name = pname
     self.dic = args if args else dict()
     
   def get_content( self ):
+    '''
+    Gibt alle zwischengespeicherten Wertepaare zurück
+    '''
     return self.dic
     
   def make( self, fname=None, **args ):
+    '''
+    Erzeugt das HTML auf Basis der übergebenen/zwischengespeicherten Wertepaare
+    und speichert diese, falls das Template einen Pfad dafür bereit hält. Gibt 
+    das Ergebnis als String zurück.
+    fname = url der zu holenden und parsenden Seite
+    '''
     if args:
       self.dic.update(**args)
     if fname:
@@ -33,43 +57,71 @@ class Page:
     return response
     
   def load_template( self, fname ):
+    '''
+    Lädt ein Template.
+    fname: Dateipfaddes zu ladenden Templates
+    '''
     f=open( fname )
     s = f.read()
     f.close()
     self.template = Template( s.decode('utf8') )
 
   def fetch_soup( self, fname ):
-    print fname
+    '''
+    Holt eine Seite und gibt diese als BeautifulSoup zurück
+    fname: URL der zu parsenden Seite
+    '''
     try:
       f=urlopen( fname )
     except Exception:
-      print "Could not fetch %s" % fname
+      log.error( "Could not fetch %s", fname )
       return
     p=f.read()
     f.close()
     return BS( p )
     
   def render_template( self, **args):
+    """
+    rendered ein Template auf Basis der übergebenen Wertepaare
+    """
     return self.template.render(**args).encode('utf8')
   
   def dump( self, text ):
+    """
+    Speichert text in eine Datei. Der Pfad zu dieser Datei sollte bekannt sein
+    """
     g = open( self.page_name, 'w' )
     g.write( text )
     g.close()
+  
+  def parse( self, soup ):
+    '''
+    Extrahiert aus einer wundervollen Suppe die zur Erzeugung eines Templates
+    erforderlichen Wertepaare und speichert diese in self.dic zwischen. Muss 
+    in Unterklasse erledigt werden.
+    soup: BeautifulSoup-Objekt. In der Regel von einer geholten Seite.
+    '''
+    pass
 
 class IndexPage( Page ):
+  """
+  Template für die Indexseite.
+  """
 
-  template_name = 'res/page.html'
+  template_name = '%s/index.html' % dirname_templates
 
   def parse( self, soup ):
+    '''
+    Parsed die Übersichtsseite mit den Artikel-Links
+    '''
     args = dict(
       title='Le Monde Diplomatique',
       charset='utf8',
       builtdate = dt.datetime.now().strftime('%c'))
     articles = []
     c = soup.find('div',{'id':'content'})
-    date = c.strong.string
-    args.update(date=date)
+#    date = c.strong.string
+#    args.update(date=date)
     toc = c.ul
     for item in toc.findAll('li'):                  
       if item.a:
@@ -92,10 +144,16 @@ class IndexPage( Page ):
     self.dic.update(**args)
 
 class ArticlePage( Page ):
+  '''
+  Template für eine Artikelseite. Default ist die Web-Darstellung
+  '''
 
-  template_name = 'res/article-web.html'
+  template_name = '%s/article-web.html' % dirname_templates
 
   def parse( self, soup ):
+    '''
+    Parsed eine Artikelseite
+    '''
     args = dict(charset='utf8')
     c = soup.find('div',{'id':'content'})
     args.update(teaser=c.find('p',{'class':'Unterzeile'}).string if c.find('p',{'class':'Unterzeile'}) else '' )
@@ -121,45 +179,69 @@ class ArticlePage( Page ):
     args.update(content=content)
     self.dic.update(**args)
 
-def make_paper( root, date, is_online=True ):
+def make_paper( target, date, is_online=True ):
   '''
-  Produziert die komplette Ausgabe als xhtml
+  Produziert die komplette Ausgabe als xhtml. Baustelle: Das richtige Handling der Links.
+  target:     Verzeichnis, in welchem das generierte xhtml abgelegt werden soll
+  date:     Datum der zu erzeugenden Ausgabe im Format, in welchem es abgefufen werden kann
+  is_online: True, wenn inline abgerufen werden soll 
   '''
-  src_root = "http://monde-diplomatique.de" if is_online else "monde-diplomatique.de"
-  index_path = "%s/archiv-text?text=%s" % (src_root,date)
-  href_index = "../index.html"
-  index = IndexPage('%s/index.html' % root )
-  index.make( index_path, stylesheet = 'res/index_styles.css', logo = 'res/logo.png' )
-  article_refs = map( lambda entry : entry['href'], index.get_content()['articles'] )
+  local = "monde-diplomatique.de"
+  # Falls offline nehme lokale Dateien:
+  src_root_url = "http://monde-diplomatique.de" if is_online else local 
+  src_index_path = "%s/archiv-text?text=%s" % (src_root_url,date) # url des Index der gewünschten Ausgbe
+  # Als erstes die Indexseite machen...
+  target_index = IndexPage('%s/index.html' % target )
+  target_index.make( src_index_path, stylesheet = 'res/index_styles.css', logo = 'res/logo.png' )
+  # ...und dann die Links zu den Artikeln extrahieren und die Artikelseiten machen
+  article_refs = map( lambda entry : entry['href'], target_index.get_content()['articles'] )
   i=0
   while i < len(article_refs):
-    src_path = '%s/%s' % (src_root,article_refs[i])
-    target_path = '%s/%s' % (root,article_refs[i])
-    next_path = '%s/%s' % (src_root,article_refs[ (i+1) % len(article_refs) ])
+    src_url = '%s/%s' % (src_root_url,article_refs[i])
+    target_path = '%s/%s' % (target,article_refs[i])
+    next_path = '%s/%s' % (src_root_url,article_refs[ (i+1) % len(article_refs) ])
     next_target = '%s' % (p.basename( next_path )) 
-    article=ArticlePage( target_path,'res/article-book.html', stylesheet = '../res/index_styles.css', date = date )
-    article.make(src_path,home=href_index,next=next_target)
+    article=ArticlePage( target_path, tpl_article_book, 
+      stylesheet = '../res/stylesheet.css', 
+      date = date,
+      home = "../index.html",
+      next=next_target )
+    article.make( src_url )
     i+=1
 
 cal = Calendar()
     
 def get_issue_date(y=None,m=None):
+  '''
+  Berechne das Datum der jeweiligen Monatsausgabe
+  Wenn nichts angegeben ist, das Datum der aktuellen Ausgabe.
+  Datum wird als datetime.date-Objekt zurückgegeben
+  '''
   today = dt.date.today()
   if not y:
     y=today.year
   if not m:
-    m=today.month -1
+    m=today.month
   dates= map(lambda w:w[get_wd(y,m)],cal.monthdayscalendar(y,m))
   d = dates[1] if dates[1] > 6 else dates[2]
   return dt.date(y,m,d)
 
 def get_wd(y,m):
+  '''
+  Der Erscheinungstag war vor April 2014 immer der Mittwoch, seitdem der Donnerstag
+  '''
   return 3 if y > 2014 or y == 2014 and m > 3 else 4
 
 LOCALE_LOCK = threading.Lock()
 
+# RSS-Dateien wollen das Datum in einem bestimmten Format, das nicht dem deutschen
+# entspricht. Deshalb für das temporäre Umschalten der Sprachungebung diese Funktion.
 @contextmanager
 def setlocale(name):
+  '''
+  Zum Einschalten der Sprachumgebung name
+  name= en_US oder de_De
+  '''
   with LOCALE_LOCK:
     saved = locale.setlocale(locale.LC_ALL)
     try:
@@ -167,15 +249,24 @@ def setlocale(name):
     finally:
       locale.setlocale(locale.LC_ALL, saved)
 
+################################################################################
+#
+# Die lMd-Webapp
+#
+################################################################################
+
 if __name__=='__main__':
+  '''
+  Webapp definieren und Appserver starten
+  '''
   from flask import Flask, request, url_for, send_from_directory, redirect
   from os import path
   
   curdir = path.abspath('.')
-  app = Flask('LMd',static_folder=curdir+'/res')
+  app = Flask('LMd',static_folder= '%s/%s' % ( curdir, dirname_tpl_res))
   content=dict()
   src_root = "http://monde-diplomatique.de"
-  font_folder = curdir+'/res/fonts'
+  font_folder = '%s/%s/fonts' % ( curdir, dirname_tpl_res )
   pubdate = ' '
   
   @app.route('/')
@@ -184,15 +275,19 @@ if __name__=='__main__':
     Die Überblicksseite mit den links zu den Ausgaben
     '''
     issues_page = Page(
-        template_name = "res/entry-page.html",
+        template_name = tpl_entry_page,
         charset = "utf8",
-        stylesheet = url_for('static',filename='index_styles.css'), 
+        stylesheet = url_for('static',filename='css/index_styles.css'), 
         logo = url_for('static',filename='logo.png') )
     # Schleife mit aktuellem Monat initialisieren
     m = dt.date.today().month
     issues = list()
     while m > 0:
       dateobj = get_issue_date( m=m )           # Bestimme Ausgabedatum
+      if dateobj > dt.date.today():
+        # Nichts zu tun, wenn das Ausgabedatum noch vor uns liegt
+        m = m-1
+        continue
       datestring = dateobj.strftime('%Y-%m-%d') # ...für den link
       date = dateobj.strftime('%d. %B %Y')      # ...für den Text
       href = '/'+datestring     
@@ -204,15 +299,21 @@ if __name__=='__main__':
 
   @app.route('/res/<path>')
   def static_proxy(path):
+    '''
+    Alles unterhalb template_ressources
+    '''
     # send_static_file will guess the correct MIME type
     return app.send_static_file( path )
   
   @app.route('/rss/<date>')
   def get_rss(date):
+    '''
+    Gibt einen Feed zurück
+    '''
     pubdate = date
     logo = url_for('static',filename='logo.png')
     issue_path = "%s/archiv-text?text=%s" % (src_root, date)
-    issue = IndexPage(template_name='res/rss.xml')
+    issue = IndexPage(template_name='%s/rss.xml' % dirname_templates )
     with setlocale( 'en_US.UTF-8' ):
       pubdate = dt.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT')
     response = issue.make( issue_path, logo = logo, pubdate = pubdate )
@@ -220,8 +321,11 @@ if __name__=='__main__':
   
   @app.route('/<date>')
   def get_issue(date):
+    '''
+    Gibt die Indexseite der Ausgabe mit Datum date zurück
+    '''
     pubdate = date
-    stylesheet = url_for('static',filename='index_styles.css')
+    stylesheet = url_for('static',filename='css/index_styles.css')
     logo = url_for('static',filename='logo.png')
     issue_path = "%s/archiv-text?text=%s" % (src_root, date)
     issue = IndexPage()
@@ -238,16 +342,18 @@ if __name__=='__main__':
   
   @app.route('/artikel/<article>')
   def get_article(article):
-    stylesheet = url_for('static',filename='article_styles.css')
-    stylesheet_content = url_for('static',filename='index_styles.css')
-    stylesheet_foundation = url_for('static',filename='res/css/foundation.css')
-    js_foundation = url_for('static',filename='res/js/vendor/foundation.js')
-    js_jquery = url_for('static',filename='res/js/vendor/jquery.js')
-    js_what_input = url_for('static',filename='res/js/vendor/what-input.js')
-    js_app = url_for('static',filename='res/js/app.js')
+    '''
+    Liefert eine Artikelseite aus
+    '''
+    stylesheet = url_for('static',filename='css/article_styles.css')
+    stylesheet_content = url_for('static',filename='css/index_styles.css')
+    stylesheet_foundation = url_for('static',filename='css/foundation.css')
+    js_foundation = url_for('static',filename='js/vendor/foundation.js')
+    js_jquery = url_for('static',filename='js/vendor/jquery.js')
+    js_what_input = url_for('static',filename='js/vendor/what-input.js')
+    js_app = url_for('static',filename='js/app.js')
     article_path = "%s/artikel/%s" % (src_root,article)
     article_i = ArticlePage( )   
-    print 'Artikel %s' % article 
     return article_i.make(article_path,
         logo = url_for('static', filename="logofficiel-enlong.png"),
         issues = content['issues'],
