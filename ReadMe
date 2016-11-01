@@ -1,8 +1,0 @@
-Skripten zum ziehen einer oder aller verfügbaren Ausgaben der Le Monde Diplomatique und Konvertieren in das E-Book-Format. Zur Konversion wird das calibre tool ebook-convert genutzt, welches ein recipe für die Konversion erwartet. Weil die URL einer Ausgabe das Publikationsdatum enthält muss dieses zur Laufzeit eingeslesen werden. dazu dient die Datei .lmd.date im Home-Verzeichnis. Darin muss ein Schnipsel der Gestalt "/pm/yyyy/mm/dd.archivhome" enthalten sein. Das Skript fetch-lmd.py erzeugt diese Schnipsel aus der Archiv-Seite.
-
-Inhalt:
-
-fetch-LMD-py  Holt urls der Ausgaben eines Jahres von http://www.monde-diplomatique.de/pm/.searchMask   
-              und auf ruft auf dieser Basis ebook-convert auf, um auch die Ausgaben zu ziehen.               
-lmd.recipe    Das calibre recipe. Mit "ebook-convert lmd.recipe lmd-Ausgabe.epub" wird eine ebook erzeugt.
-~/.lmd.date      Suffix zur Bestimmung der URL einer Ausgabe.
