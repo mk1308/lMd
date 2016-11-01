@@ -385,59 +385,7 @@ if __name__=='__main__':
     js_jquery = url_for('static',filename='js/vendor/jquery.js')
     js_what_input = url_for('static',filename='js/vendor/what-input.js')
     js_app = url_for('static',filename='js/app.js')
-    article_p  import argparse
-    
-  server = argparse.ArgumentParser(description="Startet den App-Server")
-  server.add_argument("-p", "--port", help="Port des Servers", type=int, default=5000)
-  server.add_argument("--options", help="Weitere Flask-Server-Optionen als kommaseparierte key=value-Paare", type=str, default=None)
-  server.add_argument("-d", "--debug", help="Schaltet debug mode ein", action='store_true')
-  server.add_argument("-o", "--open", help="Öffnet den Server für LAN und ggf. WAN", action='store_true')
-  opts = server.parse_args()
-  server_opts = dict(debug=opts.debug,port=opts.port)
-  g.port = opts.port
-  if opts.debug:
-    log.setLevel( logging.DEBUG )
-  if opts.open: 
-    server_opts.update(host='0.0.0.0')
-  if opts.options:
-    key_value_pattern = re.compile('[a-zA-Z0-9_]*=.*')
-    kvs=opts.options.split(',')
-    for kv in kvs:
-      if key_  import argparse
-    
-  server = argparse.ArgumentParser(description="Startet den Mediatheken-Server")
-  server.add_argument("-p", "--port", help="Port des Servers", type=int, default=5000)
-  server.add_argument("--options", help="Weitere Flask-Server-Optionen als kommaseparierte key=value-Paare", type=str, default=None)
-  server.add_argument("-d", "--debug", help="Schaltet debug mode ein", action='store_true')
-  server.add_argument("-o", "--open", help="Öffnet den Server für LAN und ggf. WAN", action='store_true')
-  opts = server.parse_args()
-  server_opts = dict(debug=opts.debug,port=opts.port)
-  g.port = opts.port
-  if opts.debug:
-    log.setLevel( logging.DEBUG )
-  if opts.open: 
-    server_opts.update(host='0.0.0.0')
-  if opts.options:
-    key_value_pattern = re.compile('[a-zA-Z0-9_]*=.*')
-    kvs=opts.options.split(',')
-    for kv in kvs:
-      if key_value_pattern.match( kv ):
-        key, value = kv.split('=')
-        if value.isdigit(): value = int( value )
-        if value=='True': value = True 
-        if value=='False': value = False 
-        server_opts.update({key:value})
-      else:
-        log.error('%s will be ignored, because it is not a key value pair!',kv)
-value_pattern.match( kv ):
-        key, value = kv.split('=')
-        if value.isdigit(): value = int( value )
-        if value=='True': value = True 
-        if value=='False': value = False 
-        server_opts.update({key:value})
-      else:
-        log.error('%s will be ignored, because it is not a key value pair!',kv)
-ath = "%s/artikel/%s" % (src_root,article)
+    article_path = "%s/artikel/%s" % (src_root,article)
     article_i = ArticlePage( )   
     return article_i.make(article_path,
         logo = url_for('static', filename="logofficiel-enlong.png"),
@@ -471,6 +419,33 @@ ath = "%s/artikel/%s" % (src_root,article)
       app.logger.debug(u"%s %s -> %s" % (asctime(), request.path, response.status_code))
       return response
 
-  app.run(debug=True,port=8000)
+  import argparse
+    
+  server = argparse.ArgumentParser(description="Startet den Appserver")
+  server.add_argument("-p", "--port", help="Port des Servers", type=int, default=8000)
+  server.add_argument("--options", help="Weitere Flask-Server-Optionen als kommaseparierte key=value-Paare", type=str, default=None)
+  server.add_argument("-d", "--debug", help="Schaltet debug mode ein", action='store_true')
+  server.add_argument("-o", "--open", help="Öffnet den Server für LAN und ggf. WAN", action='store_true')
+  opts = server.parse_args()
+  server_opts = dict(debug=opts.debug,port=opts.port)
+  port = opts.port
+  if opts.debug:
+    log.setLevel( logging.DEBUG )
+  if opts.open: 
+    server_opts.update(host='0.0.0.0')
+  if opts.options:
+    key_value_pattern = re.compile('[a-zA-Z0-9_]*=.*')
+    kvs=opts.options.split(',')
+    for kv in kvs:
+      if key_value_pattern.match( kv ):
+        key, value = kv.split('=')
+        if value.isdigit(): value = int( value )
+        if value=='True': value = True 
+        if value=='False': value = False 
+        server_opts.update({key:value})
+      else:
+        log.error('%s will be ignored, because it is not a key value pair!',kv)
+
+  app.run( **server_opts )
 
   
