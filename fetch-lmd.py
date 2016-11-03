@@ -4,7 +4,7 @@
 import argparse, subprocess as sp,re, shlex, os, sys, os.path as p, tarfile, logging
 from datetime import date
 from uuid import uuid4
-from lmd import make_paper, get_issue_date
+from lmd import make_paper, get_issue_date, get_current_issue_date
 
 
 dirname_output      = "epub"            # Unterverzeichnis für die erzeugten epubs
@@ -33,10 +33,18 @@ if __name__ == '__main__':
   log.debug( "Das gewählte Erscheinungsdatum ist der %s", issue_date.strftime('%d.%m.%Y') )
   
   if issue_date > date.today():
-    print "\nDas voraussichtliche Erscheinungsdatum ist der %s!\n" % issue_date.strftime('%d.%m.%Y')
-  else:
+    o = raw_input( "\nDas gewählte Erscheinungsdatum liegt in der Zukunft.\nAktuelle Ausgabe laden? (J/n)\n" )
+    if o.capitalize() == 'J':
+      issue_date = get_current_issue_date()
+      print "Erscheinungsdatum der aktuellen Ausgabe ist der %s" % issue_date.strftime('%d.%m.%Y')
+    else:
+      issue_date = None
+      log.debug( "Beende Prozess..." )
+
+  if issue_date:
+    log.debug( "Erzeuge epub der Ausgabe vom %s", issue_date.strftime('%d.%m.%Y') )
     datestring = issue_date.strftime('%Y-%m-%d')
-    
+  
     # Erzeuge Verzeichnisstruktur für das zu erzeugende epub einschließlich stylesheets etc.
     dirname = '%s/.%s' % ( p.expanduser('~'), uuid4() )
     tzip = tarfile.open( '%s/%s' % (dirname_ressources, tarfile_name) )

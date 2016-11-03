@@ -244,10 +244,18 @@ def make_paper( target, date, is_online=True ):
 
 cal = Calendar()
     
+def get_current_issue_date():
+  '''
+  Gibt das Ausgabedatum der aktuellem Ausgabe als datetime.date-Objekt zurück.
+  '''
+  dc = get_issue_date()
+  dp = get_issue_date( m = -1 )
+  return dc if dc < dt.date.today() else dp
+
 def get_issue_date(y=None,m=None):
   '''
   Berechne das Datum der jeweiligen Monatsausgabe
-  Wenn nichts angegeben ist, das Datum der aktuellen Ausgabe.
+  Wenn nichts angegeben ist, das Ausgabedatum des aktuellen Monats.
   Datum wird als datetime.date-Objekt zurückgegeben
   '''
   today = dt.date.today()
@@ -255,7 +263,15 @@ def get_issue_date(y=None,m=None):
     y=today.year
   if not m:
     m=today.month
+  if m==-1: # Nehme den Vormonat des aktuellen Jahres
+    y=dt.date.today().year
+    m=today.month-1
+    if m==0:
+      m,y = 12,y-1
+  # Liste die Mittwoche bzw. Donnerstage eines Monats
   dates= map(lambda w:w[get_wd(y,m)],cal.monthdayscalendar(y,m))
+  # Herausgegeben wird in der Regel am zweiten Mittwoch bzw. Donnerstag eines
+  # Monats, frühestens aber am 7. eines Monats.
   d = dates[1] if dates[1] > 6 else dates[2]
   return dt.date(y,m,d)
 
@@ -264,6 +280,20 @@ def get_wd(y,m):
   Der Erscheinungstag war vor April 2014 immer der Mittwoch, seitdem der Donnerstag
   '''
   return 3 if y > 2014 or y == 2014 and m > 3 else 4
+
+def get_issue_list( month, year ):
+  '''
+  Gibt eine Liste der Ausgabedaten (datetime.date-Objekte) der letzten 12 
+  Ausgaben bis month.year zurück.
+  month:  1-12
+  year:   vierstellige Jahreszahl
+  '''
+  issues = list()
+  for i in range( month ):
+    issues.append( get_issue_date( year, month - i ) )
+  for i in range( 12 - month ):
+    issues.append( get_issue_date( year-1, 12 - i ) )
+  return issues
 
 LOCALE_LOCK = threading.Lock()
 
@@ -296,11 +326,21 @@ if __name__=='__main__':
   from os import path
   
   curdir = path.abspath('.')
-  app = Flask('LMd',static_folder= '%s/%s' % ( curdir, dirname_tpl_res))
-  content=dict()
   src_root = "http://monde-diplomatique.de"
   font_folder = '%s/%s/fonts' % ( curdir, dirname_tpl_res )
   pubdate = ' '
+  app = Flask('LMd',static_folder= '%s/%s' % ( curdir, dirname_tpl_res))
+  content=dict() # App cache initialisieren
+  # Liste der letzten zwölf Ausgaben finden und zwischenspeichern
+  d = get_current_issue_date()
+  issues = get_issue_list( d.month, d.year )
+  issue_link_list = list()
+  for issue in issues:
+    datestring = issue.strftime('%Y-%m-%d') # ...für den link
+    date = issue.strftime('%d. %B %Y')      # ...für den Text
+    href = '/'+datestring     
+    issue_link_list.append( dict(href=href, date=date) )
+  content['issues'] = issue_link_list 
   
   @app.route('/')
   def index():
@@ -311,23 +351,9 @@ if __name__=='__main__':
         template_name = tpl_entry_page,
         charset = "utf8",
         stylesheet = url_for('static',filename='css/index_styles.css'), 
-        logo = url_for('static',filename='logo.png') )
-    # Schleife mit aktuellem Monat initialisieren
-    m = dt.date.today().month
-    issues = list()
-    while m > 0:
-      dateobj = get_issue_date( m=m )           # Bestimme Ausgabedatum
-      if dateobj > dt.date.today():
-        # Nichts zu tun, wenn das Ausgabedatum noch vor uns liegt
-        m = m-1
-        continue
-      datestring = dateobj.strftime('%Y-%m-%d') # ...für den link
-      date = dateobj.strftime('%d. %B %Y')      # ...für den Text
-      href = '/'+datestring     
-      issues.append( dict(href=href,date=date))
-      m = m-1
-    response = issues_page.make( articles=issues )
-    content['issues'] = issues
+        logo = url_for('static',filename='logo.png'),
+        articles = content['issues'] )
+    response = issues_page.make()
     return response
 
   @app.route('/res/<path>')
@@ -406,19 +432,12 @@ if __name__=='__main__':
     return send_from_directory( font_folder, fname )
 
   # configure Flask logging
-  from logging import FileHandler, DEBUG
+  from logging import FileHandler, DEBUG, ERROR
   logger = FileHandler('error.log')
-  app.logger.setLevel(DEBUG)
+  app.logger.setLevel(ERROR)
   app.logger.addHandler(logger)
     
-  # log Flask events
-  from time import asctime
-  app.logger.debug(u"Flask server started " + asctime())
-  @app.after_request
-  def write_access_log(response):
-      app.logger.debug(u"%s %s -> %s" % (asctime(), request.path, response.status_code))
-      return response
-
+  # allow for server options
   import argparse
     
   server = argparse.ArgumentParser(description="Startet den Appserver")
@@ -430,7 +449,7 @@ if __name__=='__main__':
   server_opts = dict(debug=opts.debug,port=opts.port)
   port = opts.port
   if opts.debug:
-    log.setLevel( logging.DEBUG )
+    app.logger.setLevel( DEBUG )
   if opts.open: 
     server_opts.update(host='0.0.0.0')
   if opts.options:
@@ -444,7 +463,15 @@ if __name__=='__main__':
         if value=='False': value = False 
         server_opts.update({key:value})
       else:
-        log.error('%s will be ignored, because it is not a key value pair!',kv)
+        app.logger.error('%s will be ignored, because it is not a key value pair!',kv)
+
+  # log Flask events
+  from time import asctime
+  app.logger.debug(u"Flask server started " + asctime())
+  @app.after_request
+  def write_access_log(response):
+      app.logger.debug(u"%s %s -> %s" % (asctime(), request.path, response.status_code))
+      return response
 
   app.run( **server_opts )
 
